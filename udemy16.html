@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Regular Expression</title>
+	<script>
+		function verifypassword(){
+			var pwd=document.getElementById("txtpwd").value;
+			var msg=document.getElementById("msg");
+			var Grade=document.getElementById("Grade");
+
+			function showGrade(min,max,value,low,high){
+				Grade.min=min;
+				Grade.max=max;
+				Grade.value=value;
+				Grade.low=low;
+				Grade.high=high;
+
+			}
+
+			var RegExp=/(?=*[A-Z])\w{4,15}/;
+
+			if(pwd.match(RegExp))
+			{
+				msg.innerHTML="strong password";
+				showGrade(1,100,100,0,0);
+			}
+			else{
+				if(pwd.length<4){
+					msg.innerHTML="poor password";
+					showGrade(1,100,100,60,80);
+				}
+				else{
+					msg.innerHTMl="weak password";
+					showGrade(1,100,100,40,80);
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+  <div>
+  	<fieldset>
+  		<legend>
+  			password
+  		</legend>
+  		<input type="password" id="txtpwd" onkeyup="verifypassword()">
+  		<meter min="1" max="100" value="0" low="0" high="0" id="Grade"></meter>
+  		<span id="msg"></span>
+  	</fieldset>
+  </div>
+</body>
+</html>
